@@ -51,10 +51,10 @@ class Broker{
         $this->izvrsiUpit("select * from kategorijedoktora");
     }
     public function vratiDoktoreZaPregled(){
-        $this->izvrsiUpit("select id, concat(ime, ' ', prezime) from doktori");
+        $this->izvrsiUpit("select * from doktori");
     }
     public function vratiPacijenteZaPregled(){
-        $this->izvrsiUpit("select id, concat(ime, ' ', prezime) from pacijenti");
+        $this->izvrsiUpit("select * from pacijenti");
     }
 
 //Funkcije za kreiranje
@@ -64,13 +64,13 @@ class Broker{
     public function kreirajPacijenta($ime,$prezime,$jmbg){
         $this->izvrsiUpit("insert into pacijenti (ime, prezime, jmbg) values ('$ime','$prezime', '$jmbg')");
     }
-    public function kreirajPregled($datum,$id_doktora, $id_pacijenta,$simptomi){
-        $this->izvrsiUpit("insert into pregledi (datum, idpacijenta, iddoktora, simptomi) values ('$datum',$id_doktora, $id_pacijenta, '$simptomi')");
+    public function kreirajPregled($datum,$iddoktora, $idpacijenta,$simptomi){
+        $this->izvrsiUpit("insert into pregledi (datum, idpacijenta, iddoktora, simptomi) values ('$datum',$iddoktora, $idpacijenta, '$simptomi')");
     }
 
 //Funkcije za izmenu
-    public function izmeniDoktora($id,$ime,$prezime,$jmbg, $specijalista){
-        $this->izvrsiUpit("update doktori set ime='$ime', prezime='$prezime', jmbg='$jmbg' idkategorije=$specijalista where id=$id");
+    public function izmeniDoktora($id,$ime,$prezime,$jmbg, $idkategorije){
+        $this->izvrsiUpit("update doktori set ime='$ime', prezime='$prezime', jmbg='$jmbg', idkategorije=$idkategorije where id=$id");
     }
     public function izmeniPacijenta($id,$ime,$prezime,$jmbg){
         $this->izvrsiUpit("update pacijenti set ime='$ime', prezime='$prezime', jmbg='$jmbg' where id=$id");

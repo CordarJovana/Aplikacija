@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" 
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" 
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+    <link rel="stylesheet" href="styles.css">
+    <title>BOLNICA H&H</title>
+</head>
+<body id="pacijenti">
+
+    <!-- NavBar -->
+
+    <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Početna</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pacijenti.html">Pacijenti</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="doktori.html">Doktori</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="pregledi.html">Pregledi</a>
+              </li>
+            </ul>
+        </div>
+    </nav>
+
+<!-- Forma za dodavanje novog pregleda-->
+<div class="formaZaDodavanje">
+    <h1 class="my-3">Unesite novi pregled</h1>
+    <form class="mt-5">
+        <div class="form-group">
+            <input type="datetime" class="form-control" id="datum_pregleda" placeholder="Datum pregleda">
+        </div>
+        <div class="form-group">
+            <select class="form-control" id="iddoktora">
+            </select>
+        </div>
+        <div class="form-group">
+            <select class="form-control" id="idpacijenta">
+            </select>
+        </div>
+       <div class="form-group">
+        <br>
+        <textarea name="tekst_simptoma" id="simptomi" cols="30" rows="10" placeholder="Unesite simptome pacijenta"></textarea>
+        <br>
+       </div>
+       <div class="form-group">
+        <button class="btn btn-primary" id="dodajPregled" onclick="kreirajPregled()">Sačuvaj</button>
+    </div>
+
+<!--Forma za pretragu pregleda po datumima, pacijentima i doktorima-->
+    <h1 class="my-3">Pronađite pregled</h1>
+              <form id="nadji_pregled">
+                <div class="form-inline">
+                <div class="form-group">
+                        <select class="form-control" id="doktor">
+                            </select>
+                        </div>
+                <div class="form-group">
+                            <select class="form-control" id="pacijent">
+                                </select>
+                            </div>
+                  <input type="datetime" class="form-control m-2" name="" id="datum_pregleda" 
+                  placeholder="Unesite datum" value="" required>
+ <!--VODI RACUNA OVDE U FUNKCIJI ZA DUGME CES MORATI DA STAVIS PARAMETRE KOJE-->              
+                  <button type="submit" name="submit" id="nadji_preglede" class="btn btn-success" onclick="vratiPreglede()">Pretraži</button>
+                        </div>
+              </form>
+              
+<!-- Tabela za prikaz pregleda-->
+<div class="container-fluid padding">
+    <div class="row welcome text-center">
+      <div class="col-12">
+        <div class="table">
+          <table id="users-table" class="table">
+            <thead>
+                  <tr>
+                    <th scope="col">Pregled ID</th>
+                    <th scope="col">Datum</th>
+                    <th scope="col">Doktor</th>
+                    <th scope="col">Pacijent</th>
+                    <th scope="col">Simptomi</th>
+                  </tr>
+                </thead>
+                  <tbody id="pregledi_podaci"></tbody>
+              </table>
+            </div>
+    
+
+</body>
+</html>
+
+<script>
+
+$(document).ready(function () {
+  tabelaDoktor("doktor");
+  tabelaPacijent("pacijent");
+  tabelaDoktor("iddoktora");
+  tabelaPacijent("idpacijenta");
+  });
+
+
+    function kreirajPregled(){
+                $.post("pregledi.php", {
+                    metoda: "dodaj",
+                    datum: $("#datum_pregleda").val(),
+                    iddoktora: $("#iddoktora").val(),
+                    idpacijenta: $("#idpacijenta").val(),
+                    simptomi: $("#simptomi").val()
+                }, function (data) {
+                    alert(data);
+                    tabelaDoktora();
+
+                })
+            
+}
+
+function tabelaDoktor(element, value=undefined) {
+            $.getJSON("pregledi.php", { metoda: "vrati doktore" }, function (data) {
+                if (data.status !== "ok") {
+                    alert(data.status);
+                    return;
+                }
+                $("#" + element).html(``);
+
+                for (let d of data.data) {
+                    $("#" + element).append(`<option value='${d.id}' > ${d.ime}  ${d.prezime} </option>`);
+                }
+                if (value) {
+                    $("#" + element).val(value);
+                }
+            })
+        }
+        function tabelaPacijent(element, value=undefined) {
+            $.getJSON("pregledi.php", { metoda: "vrati pacijente" }, function (data) {
+                if (data.status !== "ok") {
+                    alert(data.status);
+                    return;
+                }
+                $("#" + element).html(``);
+
+                for (let p of data.data) {
+                    $("#" + element).append(`<option value='${p.id}' > ${p.ime}  ${p.prezime} </option>`);
+                }
+                if (value) {
+                    $("#" + element).val(value);
+                }
+            })
+        }
+function vratiPreglede(){
+    
+}
+
+</script>

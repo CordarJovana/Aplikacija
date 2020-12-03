@@ -44,34 +44,38 @@
       <div class="row welcome text-center">
         <div class="col-12">
           <div class="table">
-            <h1 class="my-3">Pacijenti</h1>
+            <h1 class="my-3">Doktori</h1>
             <table id="users-table" class="table">
               <thead>
                     <tr>
-                      <th scope="col">Pacijent ID</th>
+                      <th scope="col">Doktor ID</th>
                       <th scope="col">Ime</th>
                       <th scope="col">Prezime</th>
                       <th scope="col">JMBG</th>
+                      <th scope="col">Specijalista</th>
                     </tr>
                   </thead>
-                    <tbody id="pacijenti_podaci"></tbody>
+                    <tbody id="doktori_podaci"></tbody>
                 </table>
               </div>
         
 
 <!-- Forma za unos novog pacijenta-->
-              <form id="dodaj_pacijenta">
+              <form id="dodaj_doktora">
                 <div class="form-inline">
-                  <input type="text" class="form-control m-2" name="title" id="ime_pacijenta" 
+                  <input type="text" class="form-control m-2" name="title" id="ime_doktora" 
                   placeholder="Unesite ime" value="" required>
-                  <input type="text" class="form-control m-2" name="author" id="prezime_pacijenta" 
+                  <input type="text" class="form-control m-2" name="author" id="prezime_doktora" 
                   placeholder="Unesite prezime" value="" required>
-                  <input type="text" class="form-control m-2" name="year" id="jmbg_pacijenta" 
+                  <input type="text" class="form-control m-2" name="year" id="jmbg_doktora" 
                   placeholder="Unesite JMBG" value="" required>
+                  <div class="form-group">
+                <select class="form-control" id="kategorija_doktora">
+                    </select>
+                </div>
                 </div>
                 <div class="form-group m-2">
-                  <button type="submit" name="submit" id="dodaj_pacijenta" class="btn btn-success" onclick="kreirajPacijenta()">Sačuvaj</button>
-            
+                  <button type="submit" name="submit" id="dodaj_doktora" class="btn btn-success" onclick="kreirajDoktora()">Sačuvaj</button>
                 </div>
               </form>     
             </div>
@@ -84,72 +88,95 @@
 
 <script>
       
-//Za dobijanje svih pacijenata i punjenje tabele
+//Za dobijanje svih doktora i punjenje tabele i punjenje kategorija
 $(document).ready(function () {
-  tabelaPacijenata();
+  tabelaDoktora();
+  tabelaKategorija("kategorija_doktora");
   });
 
-function tabelaPacijenata() {
-   $.getJSON("pacijenti.php", { metoda: "vrati sve" }, function (data) {
+function tabelaDoktora() {
+   $.getJSON("doktori.php", { metoda: "vrati sve" }, function (data) {
                 console.log(data);
                 if (data.status !== "ok") {
                     alert(data.status);
                     return;
                 }
                 let i = 0;
-                $("#pacijenti_podaci").html("");
-                for (let pacijent of data.data) {
-                    $("#pacijenti_podaci").append(`<tr>  
+                $("#doktori_podaci").html("");
+                for (let doktor of data.data) {
+                    $("#doktori_podaci").append(`<tr>  
                     <th scope="row">${++i}.</th>
-                    <td contentEditable=true id="${pacijent.id}Ime">${pacijent.ime} </td>
-                    <td contentEditable=true id="${pacijent.id}Prezime"> ${pacijent.prezime}</td>
-                    <td contentEditable=true id="${pacijent.id}JMBG">${pacijent.jmbg} </td>
+                    <td contentEditable=true id="${doktor.id}Ime">${doktor.ime} </td>
+                    <td contentEditable=true id="${doktor.id}Prezime"> ${doktor.prezime}</td>
+                    <td contentEditable=true id="${doktor.id}JMBG">${doktor.jmbg} </td>
+                    <td contentEditable=true ><select class="form-control" id="${doktor.id}Kat"></td>
                     <td>
-                        <button class="btn btn-primary izmeni-pacijenta" onClick="izmeniPacijenta(${pacijent.id})">Izmeni</button>
-                        <button class="btn btn-danger obriši-pacijenta" onClick="obrisiPacijenta(${pacijent.id})">Obriši</button>
+                        <button class="btn btn-primary izmeni-doktora" onClick="izmeniDoktora(${doktor.id})">Izmeni</button>
+                        <button class="btn btn-danger obriši-doktora" onClick="obrisiDoktora(${doktor.id})">Obriši</button>
                       </td>
                 </tr>`);
+                tabelaKategorija(`${doktor.id}Kat`, doktor.idkategorije);
                 }
             });
 
         }
 
+function tabelaKategorija(element, value=undefined) {
+            $.getJSON("doktori.php", { metoda: "vrati kategorije" }, function (data) {
+                if (data.status !== "ok") {
+                    alert(data.status);
+                    return;
+                }
+                $("#" + element).html(``);
+
+                for (let kat of data.data) {
+                    $("#" + element).append(`<option value='${kat.id}' > ${kat.naziv} </option>`);
+                }
+                if (value) {
+                    $("#" + element).val(value);
+                }
+            })
+        }
+
 //Kreiranje novog pacijenta
-function kreirajPacijenta(){
-                $.post("pacijenti.php", {
+function kreirajDoktora(){
+                $.post("doktori.php", {
                     metoda: "dodaj",
-                    ime: $("#ime_pacijenta").val(),
-                    prezime: $("#prezime_pacijenta").val(),
-                    jmbg: $("#jmbg_pacijenta").val()
+                    ime: $("#ime_doktora").val(),
+                    prezime: $("#prezime_doktora").val(),
+                    jmbg: $("#jmbg_doktora").val(),
+                    idkategorije: $("#kategorija_doktora").val()
                 }, function (data) {
                     alert(data);
-                    tabelaPacijenata();
+                    tabelaDoktora();
 
                 })
             
 }
 
 //Brisanje pacijenta
-function obrisiPacijenta(id) {
-  $.post("pacijenti.php", { metoda: "obrisi", id: id }, function (data) {
-                tabelaPacijenata();
+function obrisiDoktora(id) {
+  $.post("doktori.php", { metoda: "obrisi", id: id }, function (data) {
+                tabelaDoktora();
             })
         }
 
 //Izmena pacijenta
-function izmeniPacijenta(id) {
+function izmeniDoktora(id) {
             let ime = $(`#${id}Ime`).text();
             let prezime = $(`#${id}Prezime`).text();
             let jmbg = $(`#${id}JMBG`).text();
+            let idkategorije = $(`#${id}Kat`).val();
 
-            $.post("pacijenti.php", {
+            $.post("doktori.php", {
                 metoda: "izmeni",
                 id: id,
                 ime: ime,
                 prezime: prezime,
-                jmbg: jmbg
+                jmbg: jmbg,
+                idkategorije: idkategorije
             }, function (data) {
-                tabelaPacijenata();
+                tabelaDoktori();
             })
         }
       

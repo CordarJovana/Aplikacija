@@ -130,7 +130,7 @@ function tabelaKategorija(element, value=undefined) {
                 $("#" + element).html(``);
 
                 for (let kat of data.data) {
-                    $("#" + element).append(`<option value='${kat.id}' > ${kat.naziv} </option>`);
+                    $("#" + element).append(`<option value='${kat.idkategorije}' > ${kat.naziv} </option>`);
                 }
                 if (value) {
                     $("#" + element).val(value);

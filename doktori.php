@@ -25,6 +25,7 @@ if(isset($_POST["metoda"])){
         $idkategorije=$_POST["idkategorije"];
         
         $broker->kreirajDoktora($ime,$prezime,$jmbg,$idkategorije);
+        
             if(!$broker->getRezultat()){
                 echo "Nastala je greška u bazi";
             }else{

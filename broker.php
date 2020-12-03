@@ -38,9 +38,7 @@ class Broker{
 
 //Funkcije za prikaz
     public function vratiSveDoktore(){
-        $this->izvrsiUpit("select d.*, kat.naziv as 'naziv', kat.idkategorije as 'kat_id' from doktori d inner join kategorijedoktora kat on (kat.idkategorije=d.idkategorije)");
-        //$this->izvrsiUpit("select * from doktori");
-        //$this->izvrsiUpit("select d.id as 'ID', d.ime as 'Ime', d.prezime as 'Prezime', d.jmbg as 'JMBG', kat.naziv as 'Kategorija' from doktori d left join kategorijedoktora kat on (d.idkategorije=kat.idkategorije)");
+        $this->izvrsiUpit("select * from doktori");
     }
     public function vratiSvePacijente(){
         $this->izvrsiUpit("select * from pacijenti");
@@ -61,7 +59,7 @@ class Broker{
 
 //Funkcije za kreiranje
     public function kreirajDoktora($ime,$prezime,$jmbg, $idkategorije){
-        $this->izvrsiUpit("insert into doktori (ime, prezime, jmbg, idkategorije) values ('$ime','$prezime','$jmbg', $idkategorije)");
+        $this->izvrsiUpit("insert into doktori (ime, prezime, jmbg, idkategorije) values ('$ime','$prezime', '$jmbg', $idkategorije)");
     }
     public function kreirajPacijenta($ime,$prezime,$jmbg){
         $this->izvrsiUpit("insert into pacijenti (ime, prezime, jmbg) values ('$ime','$prezime', '$jmbg')");

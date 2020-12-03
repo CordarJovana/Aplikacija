@@ -44,7 +44,7 @@ class Broker{
         $this->izvrsiUpit("select * from pacijenti");
     }
     public function vratiPregled($datum){
-        $this->izvrsiUpit("select pregled.datum as 'Datum', pregled.simptomi as 'Simptomi', concat(d.ime, ' ', d.prezime) as 'Doktor', concat(p.ime, ' ', p.prezime) as 'Pacijent' from pregledi pregled inner join doktori d on (pregled.iddoktora=d.id) inner join pacijenti p on (pregled.idpacijenta=p.id) where pregled.datum='$datum'");
+        $this->izvrsiUpit("select * from pregledi where datum='$datum'");
     }
 
     public function vratiSpecijaliste(){

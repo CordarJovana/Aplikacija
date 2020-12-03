@@ -67,8 +67,7 @@
               <form id="nadji_pregled">
                 <div class="form-inline">
                 <div class="form-group">
-                        <select class="form-control" id="doktor">
-                            </select>
+                        <select class="form-control" id="doktor"></select>
                         </div>
                 <div class="form-group">
                             <select class="form-control" id="pacijent">
@@ -99,6 +98,9 @@
                   <tbody id="pregledi_podaci"></tbody>
               </table>
             </div>
+      </div>
+    </div>
+</div>
     
 
 </body>
@@ -162,7 +164,27 @@ function tabelaDoktor(element, value=undefined) {
             })
         }
 function vratiPreglede(){
-    
+    var datum=$("#datum_pregleda").text();
+    $.getJSON("pregledi.php", {metoda: "vrati sve", datum: datum}, function(data){
+        console.log(data);
+                if (data.status !== "ok") {
+                    alert(data.status);
+                    return;
+                }
+                let i = 0;
+                $("#pregledi_podaci").html("");
+                for (let pregled of data.data) {
+                    $("#pregledi_podaci").append(`<tr> 
+                        
+                    <th scope="row">${++i}.</th>
+                    <td contentEditable=true id="${pregled.id}Datum">${pregled.datum} </td>
+                    <td contentEditable=true id="${pregled.id}Doktor">${pregled.iddoktora} </td>
+                    <td contentEditable=true id="${pregled.id}Pacijent">${pregled.idpacijenta} </td>
+                    <td contentEditable=true id="${pregled.id}Simptomi">${pregled.simptomi} </td>
+                </tr>`);
+                //tabelaKategorija(`${doktor.id}Kat`, doktor.idkategorije);
+                }
+            });
 }
 
 </script>

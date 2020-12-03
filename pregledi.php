@@ -9,6 +9,7 @@ if(isset($_GET["metoda"])){
     if($_GET["metoda"]=="vrati sve"){
         
         $broker->vratiPregled($_GET["datum"]);
+        
         posalji($broker);
     }
     if($_GET["metoda"]=="vrati doktore"){

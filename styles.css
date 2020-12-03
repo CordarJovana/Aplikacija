@@ -6,6 +6,9 @@ html, body{
     font-family: 'Poppins', sans-serif;
     color: #222;
 }
+#index{
+  background-image: url('Slike/Doktori.jpeg');
+}
 
 .navbar{
     padding: .8rem;
@@ -172,7 +175,6 @@ figure {
 
 
 #fixed {
-  background-image: url(img/Background.png) !important;
   position: fixed;
   display: block;
   top: 0;

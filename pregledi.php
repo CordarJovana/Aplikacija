@@ -6,12 +6,21 @@ $broker=Broker::getBroker();
 
 
 if(isset($_GET["metoda"])){
-    if($_GET["metoda"]=="vrati sve"){
+    if($_GET["metoda"]=="vrati sve pacijenti"){
         
-        $broker->vratiPregled($_GET["datum"]);
-        
+        $idpacijenta=$_GET["idpacijenta"];
+        $broker->vratiPregledPacijent($idpacijenta);
+
         posalji($broker);
     }
+    if($_GET["metoda"]=="vrati sve doktori"){
+        
+        $iddoktora=$_GET["iddoktora"];
+        $broker->vratiPregledDoktor($iddoktora);
+
+        posalji($broker);
+    }
+
     if($_GET["metoda"]=="vrati doktore"){
         $broker->vratiDoktoreZaPregled();
         posalji($broker);

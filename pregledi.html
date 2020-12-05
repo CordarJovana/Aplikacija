@@ -42,10 +42,12 @@
 <form id="nadji_pregled">
   <div class="form-inline">
   <div class="form-group">
+      <label class="form-control">Pronađite prema pacijentu:</label>
               <select class="form-control" id="pacijent"  onchange="vratiPregledePacijenti(this.value)">
                   </select>
               </div> 
               <div class="form-group">
+                <label class="form-control">Pronađite prema doktoru:</label>
                 <select class="form-control" id="doktor" onchange="vratiPregledeDoktori(this.value)"></select>
                 </div>          
           </div>
@@ -70,13 +72,15 @@
     <h1 class="my-3">Unesite novi pregled</h1>
     <form class="mt-5">
         <div class="form-group">
-            <input type="datetime" class="form-control" id="datum_pregleda" placeholder="Datum pregleda">
+            <input type="datetime" class="form-control" id="datum_pregleda" placeholder="Unesite datum i vreme pregleda (u formatu godina-mesec-dan sat:minut:sekund)">
         </div>
         <div class="form-group">
+            <label class="form-control">Doktor:</label>
             <select class="form-control" id="iddoktora">
             </select>
         </div>
         <div class="form-group">
+            <label class="form-control">Pacijent:</label>
             <select class="form-control" id="idpacijenta">
             </select>
         </div>

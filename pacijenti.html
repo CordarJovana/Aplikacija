@@ -68,12 +68,9 @@
                   placeholder="Unesite prezime" value="" required>
                   <input type="text" class="form-control m-2" name="jmbg" id="jmbg_pacijenta" 
                   placeholder="Unesite JMBG" value="" required>
-                </div>
-                <div class="form-group m-2">
                   <button type="submit" name="submit" id="dodaj_pacijenta" class="btn btn-success" onclick="kreirajPacijenta()">Sačuvaj</button>
-            
                 </div>
-              </form>     
+                   </form>     
             </div>
           </div>
     </div>
@@ -153,72 +150,6 @@ function izmeniPacijenta(id) {
             })
         }
       
-    // AJAX Add              
-    /*$(function() {
-      $("#dodaj_pacijenta").click(function(event) {
-       event.preventDefault();
-         let title = $('#title_textfiled').val();
-         let author = $('#author_textfiled').val();
-         let year = $('#year_textfiled').val();
-         $.ajax({
-           type: "POST",
-           url: "pacijenti.php",
-           data: {
-
-             "add": title,
-             "author" : author,
-             "year" : year
-           },
-           success: function() {
-             alert('Book added');
-             location.reload();
-           }
-         });
-       });
-    });
-
-    // AJAX Delete
-    $(function() {
-      $('.delete-book').click(function() {
-        let bookId = $(this).parent().parent().data('id');
-        $.ajax({
-          url: '../handler/bookHandler.php',
-          data: {
-            "delete": bookId
-          },
-          type: 'POST',
-          success: function() {
-            alert('Book deleted');
-            location.reload();
-          }
-        });
-      });
-    });
-
-    // AJAX On edit Click
-    $(function() {
-      $('.edit-book').click(function() {
-        let userId = $(this).parent().parent().data('id');
-        $.ajax({
-          url: '../handler/userHandler.php',
-          data: {
-            "edit": userId
-          },
-          type: 'POST',
-          dataType: "json",
-          success: function(data) {
-            alert('User deleted');
-            console.log(data);
-            console.log(data["name"]);
-            $('#title_textfiled').val(data["name"]);
-            $('#add_book_button').hide();
-            $('#update_book_button').show();
-            $('#update_book_button').attr('data-id', data["id"]);
-          }
-        });
-      });
-    });
-*/
 
     </script>
 

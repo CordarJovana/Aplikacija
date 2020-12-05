@@ -44,12 +44,12 @@ class Broker{
         $this->izvrsiUpit("select * from pacijenti");
     }
     public function vratiPregledPacijent($idpacijenta){
-        $this->izvrsiUpit("select * from pregledi where idpacijenta=$idpacijenta");
+        $this->izvrsiUpit("select * from pregledi where idpacijenta=$idpacijenta order by datum DESC");
         //$this->izvrsiUpit("select pregled.id, pregled.datum, p.ime, concat(d.ime, ' ', d.prezime) as 'doktor', pregled.simptomi from pregledi pregled inner join pacijenti p on(pregled.idpacijenta=p.id) inner join doktori d on(pregled.iddoktora=d.id) where idpacijenta=$idpacijenta");
     }
 
     public function vratiPregledDoktor($iddoktora){
-        $this->izvrsiUpit("select * from pregledi where iddoktora=$iddoktora");
+        $this->izvrsiUpit("select * from pregledi where iddoktora=$iddoktora order by datum DESC");
     }
 
     public function vratiDZaPregled(){
@@ -81,7 +81,7 @@ class Broker{
         $this->izvrsiUpit("insert into pacijenti (ime, prezime, jmbg) values ('$ime','$prezime', '$jmbg')");
     }
     public function kreirajPregled($datum,$iddoktora, $idpacijenta,$simptomi){
-        $this->izvrsiUpit("insert into pregledi (datum, idpacijenta, iddoktora, simptomi) values ('$datum',$iddoktora, $idpacijenta, '$simptomi')");
+        $this->izvrsiUpit("insert into pregledi (datum, idpacijenta, iddoktora, simptomi) values ('$datum',$idpacijenta, $iddoktora, '$simptomi')");
     }
 
 //Funkcije za izmenu

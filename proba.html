@@ -58,8 +58,8 @@
         <tr>
             <th scope="col">Pregled ID</th>
             <th scope="col">Datum</th>
-            <th scope="col">Doktor</th>
             <th scope="col">Pacijent</th>
+            <th scope="col">Doktor</th>
             <th scope="col">Simptomi</th>
         </tr>
         <tbody id="preglediBody"></tbody>
@@ -96,10 +96,13 @@
 <script>
 
     $(document).ready(function () {
-      tabelaDoktor("doktor");
+      
       tabelaPacijent("pacijent");
+      tabelaDoktor("doktor");
+      
       tabelaDoktor("iddoktora");
       tabelaPacijent("idpacijenta");
+      
       });
     
     
@@ -167,17 +170,16 @@
                         <tr id="proba">
                             <td>${++i}.</td>
                             <td>${p.datum}</td>
-                            <td><div id="${p.id}Doktor"></div></td>
                             <td><div id="${p.id}Pacijent"></div></td>
+                            <td><div id="${p.id}Doktor"></div></td>
                             <td>${p.simptomi}</td>
                         </tr>
                     `);
+                    prikaziPacijenta(`${p.id}Pacijent`, p.idpacijenta);
                     prikaziDoktora(`${p.id}Doktor`, p.iddoktora);
-                prikaziPacijenta(`${p.id}Pacijent`, p.idpacijenta);
-                }
                 
-               // $("#izabranaBiblioteka").val(id);
-                //napuniKomboSaKnjigama(id);
+                }
+  
 
             })
         }
@@ -207,8 +209,7 @@
                     prikaziDoktora(`${p.id}Doktor`, p.iddoktora);
                     prikaziPacijenta(`${p.id}Pacijent`, p.idpacijenta);
                 }
-               // $("#izabranaBiblioteka").val(id);
-                //napuniKomboSaKnjigama(id);
+           
               
             })
         }
@@ -240,97 +241,6 @@
 
             }});
         }
-    /*function vratiPreglede(){
-        var datum=$("#datum_pregleda").val();
-        $.getJSON("pregledi.php", {metoda: "vrati sve", datum: datum}, function(data){
-            console.log(data);
-                    if (data.status !== "ok") {
-                        alert(data.status);
-                        return;
-                    }
-                    let i = 0;
-                    $("#pregledi_podaci").html("");
-                    for (let pregled of data.data) {
-                        $("#pregledi_podaci").append(`<tr> 
-                            
-                        <th scope="row">${++i}.</th>
-                        <td id="${pregled.id}Datum">${pregled.datum} </td>
-                        <td  id="${pregled.id}Doktor">${pregled.iddoktora} </td>
-                        <td  id="${pregled.id}Pacijent">${pregled.idpacijenta} </td>
-                        <td  id="${pregled.id}Simptomi">${pregled.simptomi} </td>
-                    </tr>`);
-                    //tabelaKategorija(`${doktor.id}Kat`, doktor.idkategorije);
-                    }
-                });
-    }*/
-
-
-      
-   /* function vratiPreglede(){
-        var e = document.getElementById("#pacijent");
-var idpacijenta=e.selectElement.options[e.selectedIndex].value;
-        //var idpacijenta=parseInt($("#pacijent").get("value"));
-
-        $.getJSON("pregledi.php", {metoda: "vrati sve", idpacijenta: idpacijenta}, function(data){
-            console.log(data);
-                    if (data.status !== "ok") {
-                        alert(data.status);
-                        return;
-                    }
-                    let i = 0;
-                    $("#pregledi_podaci").html("");
-                    for (let pregled of data.data) {
-                        $("#pregledi_podaci").append(`<tr> 
-                            
-                        <th scope="row">${++i}.</th>
-                        <td id="${pregled.id}Datum">${pregled.datum} </td>
-                        <td  id="${pregled.id}Doktor">${pregled.iddoktora} </td>
-                        <td  id="${pregled.id}Pacijent">${pregled.idpacijenta} </td>
-                        <td  id="${pregled.id}Simptomi">${pregled.simptomi} </td>
-                    </tr>`);
-                    //tabelaKategorija(`${doktor.id}Kat`, doktor.idkategorije);
-                    }
-                });
-                vratiPreglede.preventDefault();
-  vratiPreglede.stopPropagation();
-    }*/
-    
-    /*function getSelectedOption(sel) {
-            var idpacijenta;
-            for ( var i = 0, len = sel.options.length; i < len; i++ ) {
-                idpacijenta = sel.options[i];
-                if ( idpacijenta.selected === true ) {
-                    break;
-                }
-            }
-            return idpacijenta;
-        }
-        
-    function vratiPreglede(){
-        var sel = document.getElementById('pacijent');
-        var idpacijenta=getSelectedOption(sel);
-        $.getJSON("pregledi.php", {metoda: "vrati sve", idpacijenta: idpacijenta}, function(data){
-            console.log(data);
-                    if (data.status !== "ok") {
-                        alert(data.status);
-                        return;
-                    }
-                    let i = 0;
-                    $("#pregledi_podaci").html("");
-                    for (let pregled of data.data) {
-                        $("#pregledi_podaci").append(`<tr> 
-                            
-                        <th scope="row">${++i}.</th>
-                        <td id="${pregled.id}Datum">${pregled.datum} </td>
-                        <td  id="${pregled.id}Doktor">${pregled.iddoktora} </td>
-                        <td  id="${pregled.id}Pacijent">${pregled.idpacijenta} </td>
-                        <td  id="${pregled.id}Simptomi">${pregled.simptomi} </td>
-                    </tr>`);
-                    //tabelaKategorija(`${doktor.id}Kat`, doktor.idkategorije);
-                    }
-                });
-        
-    }*/
     
     </script>
     

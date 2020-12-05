@@ -52,14 +52,25 @@ class Broker{
         $this->izvrsiUpit("select * from pregledi where iddoktora=$iddoktora");
     }
 
+    public function vratiDZaPregled(){
+        $this->izvrsiUpit("select * from doktori");
+    }
+
+    public function vratiPZaPregled(){
+        $this->izvrsiUpit("select * from pacijenti");
+    }
+
+
     public function vratiSpecijaliste(){
         $this->izvrsiUpit("select * from kategorijedoktora");
     }
-    public function vratiDoktoreZaPregled(){
-        $this->izvrsiUpit("select * from doktori");
+   
+    
+    public function vratiDoktoreZaPregled($iddoktora){
+        $this->izvrsiUpit("select * from doktori where id=$iddoktora");
     }
-    public function vratiPacijenteZaPregled(){
-        $this->izvrsiUpit("select * from pacijenti");
+    public function vratiPacijenteZaPregled($idpacijenta){
+        $this->izvrsiUpit("select * from pacijenti where id=$idpacijenta");
     }
 
 //Funkcije za kreiranje

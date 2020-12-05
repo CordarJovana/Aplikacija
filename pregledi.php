@@ -6,6 +6,9 @@ $broker=Broker::getBroker();
 
 
 if(isset($_GET["metoda"])){
+
+
+//ZA PRETRAGU PO PACIJENTIMA I DOKTORIMA
     if($_GET["metoda"]=="vrati sve pacijenti"){
         
         $idpacijenta=$_GET["idpacijenta"];
@@ -21,12 +24,28 @@ if(isset($_GET["metoda"])){
         posalji($broker);
     }
 
+
+
     if($_GET["metoda"]=="vrati doktore"){
-        $broker->vratiDoktoreZaPregled();
+        $broker->vratiDZaPregled();
         posalji($broker);
     }
     if($_GET["metoda"]=="vrati pacijente"){
-        $broker->vratiPacijenteZaPregled();
+        $broker->vratiPZaPregled();
+        posalji($broker);
+    }
+
+
+
+    //VRACA PO PREGLEDU IME I PREZIME TOG DOKTORA I PACIJENTA UMESTO ID
+    if($_GET["metoda"]=="vrati doktore za pregled"){
+        $iddoktora=$_GET["iddoktora"];
+        $broker->vratiDoktoreZaPregled($iddoktora);
+        posalji($broker);
+    }
+    if($_GET["metoda"]=="vrati pacijente za pregled"){
+        $idpacijenta=$_GET["idpacijenta"];
+        $broker->vratiPacijenteZaPregled($idpacijenta);
         posalji($broker);
     }
 }

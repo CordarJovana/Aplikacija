@@ -58,8 +58,8 @@
         <tr>
             <th scope="col">Pregled ID</th>
             <th scope="col">Datum</th>
-            <th scope="col">Pacijent ID</th>
-            <th scope="col">Doktor ID</th>
+            <th scope="col">Doktor</th>
+            <th scope="col">Pacijent</th>
             <th scope="col">Simptomi</th>
         </tr>
         <tbody id="preglediBody"></tbody>
@@ -164,15 +164,18 @@
                 $("#preglediBody").html("");
                 for (let p of data.data) {
                     $("#preglediBody").append(`
-                        <tr>
+                        <tr id="proba">
                             <td>${++i}.</td>
                             <td>${p.datum}</td>
-                            <td>${p.idpacijenta}</td>
-                            <td>${p.iddoktora}</td>
+                            <td><div id="${p.id}Doktor"></div></td>
+                            <td><div id="${p.id}Pacijent"></div></td>
                             <td>${p.simptomi}</td>
                         </tr>
                     `);
+                    prikaziDoktora(`${p.id}Doktor`, p.iddoktora);
+                prikaziPacijenta(`${p.id}Pacijent`, p.idpacijenta);
                 }
+                
                // $("#izabranaBiblioteka").val(id);
                 //napuniKomboSaKnjigama(id);
 
@@ -196,16 +199,46 @@
                         <tr>
                             <td>${++i}.</td>
                             <td>${p.datum}</td>
-                            <td>${p.idpacijenta}</td>
-                            <td>${p.iddoktora}</td>
+                            <td><div id="${p.id}Doktor"></div></td>
+                            <td><div id="${p.id}Pacijent"></div></td>
                             <td>${p.simptomi}</td>
                         </tr>
                     `);
+                    prikaziDoktora(`${p.id}Doktor`, p.iddoktora);
+                    prikaziPacijenta(`${p.id}Pacijent`, p.idpacijenta);
                 }
                // $("#izabranaBiblioteka").val(id);
                 //napuniKomboSaKnjigama(id);
-
+              
             })
+        }
+
+
+        function prikaziDoktora(element, iddoktora){
+            $.getJSON("pregledi.php", { metoda: "vrati doktore za pregled", iddoktora: iddoktora }, function (data) {
+                if (data.status !== "ok") {
+                    alert(data.status);
+                    return;
+                }
+                $("#" + element).html(``);
+                for (let kat of data.data) {
+                    $("#" + element).append(`<label> ${kat.ime} ${kat.prezime}</label>`);
+
+            }});
+        }
+
+        function prikaziPacijenta(element, idpacijenta){
+            $.getJSON("pregledi.php", { metoda: "vrati pacijente za pregled", idpacijenta: idpacijenta }, function (data) {
+                if (data.status !== "ok") {
+                    alert(data.status);
+                    return;
+                }
+                $("#" + element).html(``);
+
+                for (let kat of data.data) {
+                    $("#" + element).append(`<label> ${kat.ime} ${kat.prezime}</label>`);
+
+            }});
         }
     /*function vratiPreglede(){
         var datum=$("#datum_pregleda").val();

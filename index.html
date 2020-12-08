@@ -12,14 +12,20 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="Slike/favicon.png">
     <title>BOLNICA H&H</title>
 </head>
-<body id="index">
+<body>
 
-    <!-- NavBar -->
+    <!-- Navigation -->
 
     <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+        <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
@@ -33,9 +39,51 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="pregledi.html">Pregledi</a>
-                </li>
             </ul>
         </div>
+    </div>
+
     </nav>
+    <!-- Image Slider -->
+
+    <div id="slides" class="carousel slide" data-ride="carousel">
+        <ul class="carousel-indicators">
+            <li data-target="#slides" data-slide-to="0" class="active"></li>
+        </ul>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="Slike/Indeks.jpg" alt="First picture">
+                <div class="carousel-caption">
+                    <h1 class="display-2">Bolnica H&H</h1>
+                    <h3>Tu za vaše zdravlje i vas!</h3>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <div class="container-fluid padding">
+            <div class="row text-center">
+                <div class="col-md-6">
+                    <hr class="dark">
+                    <p>tel. 011/255-255</p>
+                    <p>bolnicahandh@gmail.com</p> 
+                    <p>Požeška 97, Čukarica</p>
+                    <p>beograd, Srbija</p>
+                </div>
+                <div class="col-md-6">                   
+                    <hr class="dark">
+                    <p>Otvoreni smo 24/7</p>
+                    <p>Najbolji stručnjaci rade kod nas</p>
+                    <p>Pozovite nas i zakažite vaš pregled</p>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
 </body>
 </html>

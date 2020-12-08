@@ -6,9 +6,6 @@ html, body{
     font-family: 'Poppins', sans-serif;
     color: #222;
 }
-#index{
-  background-image: url('Slike/Doktori.jpeg');
-}
 
 .navbar{
     padding: .8rem;
@@ -35,12 +32,14 @@ html, body{
   font-size: 500%;
   text-transform: uppercase;
   text-shadow: 1px 1px 15px #000;
+  color:purple;
 }
 .carousel-caption h3{
   font-size: 200%;
   font-weight: 500;
   text-shadow: 1px 1px 10px #000;
   padding-bottom: 1rem;
+  color: purple;
 }
 
 .btn-primary{
@@ -52,6 +51,7 @@ html, body{
   background-color: #563d7c;
   border: 1px solid #563d7c;
 }
+
 
 .jumbotron{
   padding: 1rem;
@@ -76,8 +76,8 @@ html, body{
 }
 
 footer{
-  background-color: #6648b1;
-  color: #d5d5d5;
+  background-color:white;
+  color: black;
   padding-top: 2rem;
 
 }
@@ -99,6 +99,16 @@ hr.light-100{
   margin-bottom: 1rem;
 }
 
+.formaZaDodavanje h1{
+  text-align: center;
+}
+
+#nadji_pregled h1{
+  text-align: center;
+}
+.form-inline{
+  justify-content: center;
+}
 
 /*---Media Queries --*/
 @media (max-width: 992px) {
@@ -175,6 +185,7 @@ figure {
 
 
 #fixed {
+  background-image: url(img/Background.png) !important;
   position: fixed;
   display: block;
   top: 0;
@@ -192,13 +203,23 @@ figure {
     padding: 1rem;
 }
 
+#pacijenti_body{
+  background-image: url("Slike/pacijenti.jpg");
+  background-size: 100% !important;
+  background-repeat:no-repeat;
+}
 
+#doktori_body{
+  background-image: url("Slike/Doktori.jpg");
+  background-size: 100% !important;
+  background-repeat:no-repeat;
+}
 
-
-
-
-
-
+#pregledi_body{
+  background-image: url("Slike/proba.png");
+  background-size: 100% !important;
+  background-repeat:no-repeat;
+}
 
 
 

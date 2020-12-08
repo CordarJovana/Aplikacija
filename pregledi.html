@@ -13,16 +13,17 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="Slike/favicon.png">
     <title>BOLNICA H&H</title>
 </head>
-<body id="pacijenti">
+<body id="pregledi_body">
 
     <!-- NavBar -->
 
     <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="index.html">Početna</a>
                 </li>
                 <li class="nav-item">
@@ -31,24 +32,24 @@
                 <li class="nav-item">
                     <a class="nav-link" href="doktori.html">Doktori</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item  active">
                   <a class="nav-link" href="pregledi.html">Pregledi</a>
               </li>
             </ul>
         </div>
     </nav>
 <!--Forma za pretragu pregleda po datumima, pacijentima i doktorima-->
-<h1 class="my-3">Pronađite pregled</h1>
 <form id="nadji_pregled">
+<h1 class="my-3">Pronađite pregled</h1>
   <div class="form-inline">
   <div class="form-group">
-      <label class="form-control">Pronađite prema pacijentu:</label>
-              <select class="form-control" id="pacijent"  onchange="vratiPregledePacijenti(this.value)">
+      <label class="form-control m-4">Pronađite prema pacijentu:</label>
+              <select class="form-control m-4" id="pacijent"  onchange="vratiPregledePacijenti(this.value)">
                   </select>
-              </div> 
+              </div>
               <div class="form-group">
-                <label class="form-control">Pronađite prema doktoru:</label>
-                <select class="form-control" id="doktor" onchange="vratiPregledeDoktori(this.value)"></select>
+                <label class="form-control m-4">Pronađite prema doktoru:</label>
+                <select class="form-control m-4" id="doktor" onchange="vratiPregledeDoktori(this.value)"></select>
                 </div>          
           </div>
 </form>
@@ -60,8 +61,8 @@
         <tr>
             <th scope="col">Pregled ID</th>
             <th scope="col">Datum</th>
-            <th scope="col">Pacijent</th>
             <th scope="col">Doktor</th>
+            <th scope="col">Pacijent</th>
             <th scope="col">Simptomi</th>
         </tr>
         <tbody id="preglediBody"></tbody>
@@ -69,29 +70,43 @@
 </div>
 <!-- Forma za dodavanje novog pregleda-->
 <div class="formaZaDodavanje">
-    <h1 class="my-3">Unesite novi pregled</h1>
-    <form class="mt-5">
-        <div class="form-group">
-            <input type="datetime" class="form-control" id="datum_pregleda" placeholder="Unesite datum i vreme pregleda (u formatu godina-mesec-dan sat:minut:sekund)">
-        </div>
-        <div class="form-group">
-            <label class="form-control">Doktor:</label>
-            <select class="form-control" id="iddoktora">
+    <form>
+        <h1 class="my-3">Unesite novi pregled</h1>
+        <div class="form-inline">
+            <input type="datetime" class="form-control m-2" title="Unesite datum i vreme pregleda (u formatu godina-mesec-dan sat:minut:sekund)" id="datum_pregleda" placeholder="Unesite datum">
+            <label class="form-control m-1">Doktor:</label>
+            <select class="form-control m-1" id="iddoktora">
             </select>
-        </div>
-        <div class="form-group">
-            <label class="form-control">Pacijent:</label>
-            <select class="form-control" id="idpacijenta">
+            <label class="form-control m-1">Pacijent:</label>
+            <select class="form-control m-1" id="idpacijenta">
             </select>
+        <br>
+        <textarea class="form-control m-1" name="tekst_simptoma" id="simptomi" cols="30" rows="10" placeholder="Unesite simptome pacijenta" ></textarea>
+        <button class="btn btn-primary form-control m-1" id="dodajPregled" onclick="kreirajPregled()">Sačuvaj</button>
+</div>
+</form>
+
+<footer>
+
+    <div class="container-fluid padding">
+        <div class="row text-center">
+            <div class="col-md-6">
+                <hr class="dark">
+                <p>tel. 011/255-255</p>
+                <p>bolnicahandh@gmail.com</p> 
+                <p>Požeška 97, Čukarica</p>
+                <p>beograd, Srbija</p>
+            </div>
+            <div class="col-md-6">                   
+                <hr class="dark">
+                <p>Otvoreni smo 24/7</p>
+                <p>Najbolji stručnjaci rade kod nas</p>
+                <p>Pozovite nas i zakažite vaš pregled</p>
+            </div>
         </div>
-       <div class="form-group">
-        <br>
-        <textarea name="tekst_simptoma" id="simptomi" cols="30" rows="10" placeholder="Unesite simptome pacijenta"></textarea>
-        <br>
-       </div>
-       <div class="form-group">
-        <button class="btn btn-primary" id="dodajPregled" onclick="kreirajPregled()">Sačuvaj</button>
     </div>
+
+</footer>
 
 
 </body>

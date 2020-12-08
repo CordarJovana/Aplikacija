@@ -13,22 +13,23 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="Slike/favicon.png">
     <title>BOLNICA H&H</title>
 </head>
-<body id="pacijenti">
+<body id="doktori_body">
 
     <!-- NavBar -->
 
     <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="index.html">Početna</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="pacijenti.html">Pacijenti</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item  active">
                     <a class="nav-link" href="doktori.html">Doktori</a>
                 </li>
                 <li class="nav-item">
@@ -70,18 +71,38 @@
                   <input type="text" class="form-control m-2" name="jmbg" id="jmbg_doktora" 
                   placeholder="Unesite JMBG" value="" required>
                   <div class="form-group">
-                <select class="form-control" id="kategorija_doktora">
+                <select class="form-control m-2" id="kategorija_doktora">
                     </select>
                 </div>
                 
                
-                  <button type="submit" name="submit" id="dodaj_doktora" class="btn btn-success" onclick="kreirajDoktora()">Sačuvaj</button>
+                  <button type="submit" name="submit" id="dodaj_doktora" class="btn btn-success m-2" onclick="kreirajDoktora()">Sačuvaj</button>
                 
               </form>     
             </div>
           </div>
     </div>
+    <footer>
 
+      <div class="container-fluid padding">
+          <div class="row text-center">
+              <div class="col-md-6">
+                  <hr class="dark">
+                  <p>tel. 011/255-255</p>
+                  <p>bolnicahandh@gmail.com</p> 
+                  <p>Požeška 97, Čukarica</p>
+                  <p>beograd, Srbija</p>
+              </div>
+              <div class="col-md-6">                   
+                  <hr class="dark">
+                  <p>Otvoreni smo 24/7</p>
+                  <p>Najbolji stručnjaci rade kod nas</p>
+                  <p>Pozovite nas i zakažite vaš pregled</p>
+              </div>
+          </div>
+      </div>
+
+  </footer>
     
   </body>
   </html>

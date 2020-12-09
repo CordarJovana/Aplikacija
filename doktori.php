@@ -4,7 +4,6 @@ include "broker.php";
 
 $broker=Broker::getBroker();
 
-//Ovo moze da ne radi zbog kategorija doktora pa to proveriti i koristiti kao primer knjige php
 if(isset($_GET["metoda"])){
     if($_GET["metoda"]=="vrati sve"){
         $broker->vratiSveDoktore();

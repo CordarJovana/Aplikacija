@@ -102,7 +102,6 @@
 
 <script>
       
-//Za dobijanje svih pacijenata i punjenje tabele
 $(document).ready(function () {
   tabelaPacijenata();
   });
@@ -147,14 +146,13 @@ function kreirajPacijenta(){
             
 }
 
-//Brisanje pacijenta
 function obrisiPacijenta(id) {
   $.post("pacijenti.php", { metoda: "obrisi", id: id }, function (data) {
                 tabelaPacijenata();
             })
         }
 
-//Izmena pacijenta
+
 function izmeniPacijenta(id) {
             let ime = $(`#${id}Ime`).text();
             let prezime = $(`#${id}Prezime`).text();

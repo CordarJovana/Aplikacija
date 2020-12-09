@@ -4,7 +4,6 @@ include "broker.php";
 
 $broker=Broker::getBroker();
 
-//SLANJE ZAHTEVA ZA PRIKAZ SVIH PACIJENATA BROKERU
 
 if(isset($_GET["metoda"])){
     if($_GET["metoda"]=="vrati sve"){

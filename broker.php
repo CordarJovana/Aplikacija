@@ -30,7 +30,7 @@ class Broker{
         }
         return $broker;
     }
-    //Proveriti posle ovu funkciju 
+    
     private function izvrsiUpit($upit){
         $this->rezultat=$this->dblink->query($upit);
     }
@@ -45,8 +45,7 @@ class Broker{
     }
     public function vratiPregledPacijent($idpacijenta){
         $this->izvrsiUpit("select * from pregledi where idpacijenta=$idpacijenta order by datum DESC");
-        //$this->izvrsiUpit("select pregled.id, pregled.datum, p.ime, concat(d.ime, ' ', d.prezime) as 'doktor', pregled.simptomi from pregledi pregled inner join pacijenti p on(pregled.idpacijenta=p.id) inner join doktori d on(pregled.iddoktora=d.id) where idpacijenta=$idpacijenta");
-    }
+      }
 
     public function vratiPregledDoktor($iddoktora){
         $this->izvrsiUpit("select * from pregledi where iddoktora=$iddoktora order by datum DESC");

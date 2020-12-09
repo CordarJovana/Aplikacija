@@ -109,7 +109,6 @@
 
 <script>
       
-//Za dobijanje svih doktora i punjenje tabele i punjenje kategorija
 $(document).ready(function () {
   tabelaDoktora();
   tabelaKategorija("kategorija_doktora");
@@ -159,7 +158,6 @@ function tabelaKategorija(element, value=undefined) {
             })
         }
 
-//Kreiranje novog pacijenta
 function kreirajDoktora(){
                 $.post("doktori.php", {
                     metoda: "dodaj",
@@ -175,14 +173,14 @@ function kreirajDoktora(){
             
 }
 
-//Brisanje pacijenta
+
 function obrisiDoktora(id) {
   $.post("doktori.php", { metoda: "obrisi", id: id }, function (data) {
                 tabelaDoktora();
             })
         }
 
-//Izmena pacijenta
+
 function izmeniDoktora(id) {
             let ime = $(`#${id}Ime`).text();
             let prezime = $(`#${id}Prezime`).text();
@@ -201,72 +199,6 @@ function izmeniDoktora(id) {
             })
         }
       
-    // AJAX Add              
-    /*$(function() {
-      $("#dodaj_pacijenta").click(function(event) {
-       event.preventDefault();
-         let title = $('#title_textfiled').val();
-         let author = $('#author_textfiled').val();
-         let year = $('#year_textfiled').val();
-         $.ajax({
-           type: "POST",
-           url: "pacijenti.php",
-           data: {
-
-             "add": title,
-             "author" : author,
-             "year" : year
-           },
-           success: function() {
-             alert('Book added');
-             location.reload();
-           }
-         });
-       });
-    });
-
-    // AJAX Delete
-    $(function() {
-      $('.delete-book').click(function() {
-        let bookId = $(this).parent().parent().data('id');
-        $.ajax({
-          url: '../handler/bookHandler.php',
-          data: {
-            "delete": bookId
-          },
-          type: 'POST',
-          success: function() {
-            alert('Book deleted');
-            location.reload();
-          }
-        });
-      });
-    });
-
-    // AJAX On edit Click
-    $(function() {
-      $('.edit-book').click(function() {
-        let userId = $(this).parent().parent().data('id');
-        $.ajax({
-          url: '../handler/userHandler.php',
-          data: {
-            "edit": userId
-          },
-          type: 'POST',
-          dataType: "json",
-          success: function(data) {
-            alert('User deleted');
-            console.log(data);
-            console.log(data["name"]);
-            $('#title_textfiled').val(data["name"]);
-            $('#add_book_button').hide();
-            $('#update_book_button').show();
-            $('#update_book_button').attr('data-id', data["id"]);
-          }
-        });
-      });
-    });
-*/
 
     </script>
 

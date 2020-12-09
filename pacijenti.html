@@ -85,7 +85,7 @@
                   <p>tel. 011/255-255</p>
                   <p>bolnicahandh@gmail.com</p> 
                   <p>Požeška 97, Čukarica</p>
-                  <p>beograd, Srbija</p>
+                  <p>Beograd, Srbija</p>
               </div>
               <div class="col-md-6">                   
                   <hr class="dark">
@@ -143,6 +143,8 @@ function kreirajPacijenta(){
                     tabelaPacijenata();
 
                 })
+    
+    
             
 }
 
@@ -154,6 +156,7 @@ function obrisiPacijenta(id) {
 
 
 function izmeniPacijenta(id) {
+    
             let ime = $(`#${id}Ime`).text();
             let prezime = $(`#${id}Prezime`).text();
             let jmbg = $(`#${id}JMBG`).text();
@@ -166,9 +169,33 @@ function izmeniPacijenta(id) {
                 jmbg: jmbg
             }, function (data) {
                 tabelaPacijenata();
-            })
-        }
+            })}
+          
+        
       
+function proveraPodataka(ime, prezime, jmbg){
+    if(ime!=="" && prezime!=="" && jmbg!==""){
+        if(proveraJMBG(jmbg)){
+            return true;
+        }
+    }
+    return false;
+}
 
+function proveraJMBG(jmbg){
+    if(isNaN(jmbg)){
+        if(proveraDuzineJMBG(jmbg)){
+       return true;}
+    }
+    return false;
+}
+
+
+function proveraDuzineJMBG(jmbg){
+    if(jmbg.toString().length==13){
+        return true;
+    }
+    return false;
+}
     </script>
 

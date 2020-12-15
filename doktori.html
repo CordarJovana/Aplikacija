@@ -59,6 +59,7 @@
                     <tbody id="doktori_podaci"></tbody>
                 </table>
               </div>
+        </div></div></div>
         
 
 <!-- Forma za unos novog pacijenta-->
@@ -74,14 +75,11 @@
                 <select class="form-control m-2" id="kategorija_doktora">
                     </select>
                 </div>
-                
-               
                   <button type="submit" name="submit" id="dodaj_doktora" class="btn btn-success m-2" onclick="kreirajDoktora()">Sačuvaj</button>
                 
               </form>     
-            </div>
-          </div>
-    </div>
+            
+    
     <footer>
 
       <div class="container-fluid padding">
@@ -149,6 +147,8 @@ function tabelaKategorija(element, value=undefined) {
                 }
                 $("#" + element).html(``);
 
+                $("#" + element).append(`<option value='pocetna' >Specijalnost</option>`);
+
                 for (let kat of data.data) {
                     $("#" + element).append(`<option value='${kat.idkategorije}' > ${kat.naziv} </option>`);
                 }
@@ -159,6 +159,7 @@ function tabelaKategorija(element, value=undefined) {
         }
 
 function kreirajDoktora(){
+    if(proveraPodataka($("#ime_doktora").val(), $("#prezime_doktora").val(), $("#jmbg_doktora").val(), $("#kategorija_doktora").val())){
                 $.post("doktori.php", {
                     metoda: "dodaj",
                     ime: $("#ime_doktora").val(),
@@ -169,7 +170,10 @@ function kreirajDoktora(){
                     alert(data);
                     tabelaDoktora();
 
-                })
+                })}
+                else{
+                    alert("Niste dobro uneli podatke o doktorima!");
+                }
             
 }
 
@@ -198,6 +202,33 @@ function izmeniDoktora(id) {
                 tabelaDoktori();
             })
         }
+
+
+
+    function proveraPodataka(ime, prezime, jmbg, spec){
+    if(ime!=="" && prezime!=="" && jmbg!=="" && spec.value!=="pocetna"){
+        if(proveraJMBG(jmbg)){
+            return true;
+        }
+    }
+    return false;
+}
+
+function proveraJMBG(jmbg){
+    if(!isNaN(jmbg)){
+        if(proveraDuzineJMBG(jmbg)){
+       return true;}
+    }
+    return false;
+}
+
+
+function proveraDuzineJMBG(jmbg){
+    if(jmbg.toString().length==13){
+        return true;
+    }
+    return false;
+}
       
 
     </script>

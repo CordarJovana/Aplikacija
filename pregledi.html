@@ -73,10 +73,10 @@
         <h1 class="my-3">Unesite novi pregled</h1>
         <div class="form-inline">
             <input type="datetime" class="form-control m-2" title="Unesite datum i vreme pregleda (u formatu godina-mesec-dan sat:minut:sekund)" id="datum_pregleda" placeholder="Unesite datum">
-            <label class="form-control m-1">Doktor:</label>
+            
             <select class="form-control m-1" id="iddoktora">
             </select>
-            <label class="form-control m-1">Pacijent:</label>
+            
             <select class="form-control m-1" id="idpacijenta">
             </select>
         <br>
@@ -125,6 +125,7 @@
     
     
         function kreirajPregled(){
+            if(proveraPodataka($("#datum_pregleda").val(), $("#iddoktora").val(), $("#idpacijenta").val(), $("#simptomi").val())){
                     $.post("pregledi.php", {
                         metoda: "dodaj",
                         datum: $("#datum_pregleda").val(),
@@ -135,7 +136,10 @@
                         alert(data);
                         tabelaDoktora();
     
-                    })
+                    })}
+                    else{
+                        alert("Niste dobro uneli podatke!");
+                    }
                 
     }
     
@@ -146,6 +150,8 @@
                         return;
                     }
                     $("#" + element).html(``);
+
+                    $("#" + element).append(`<option value='pocetna' >Doktor</option>`);
     
                     for (let d of data.data) {
                         $("#" + element).append(`<option value='${d.id}' > ${d.ime}  ${d.prezime} </option>`);
@@ -162,6 +168,8 @@
                         return;
                     }
                     $("#" + element).html(``);
+
+                    $("#" + element).append(`<option value='pocetna' >Pacijent</option>`);
     
                     for (let p of data.data) {
                         $("#" + element).append(`<option value='${p.id}' >${p.ime}  ${p.prezime}</option>`);
@@ -259,6 +267,21 @@
 
             }});
         }
+
+
+    function proveraPodataka(datum, doktor, pacijent, simp){
+    if(datum!=="" && simp!=="" && doktor.value!=="pocetna" && pacijent.value!=="pocetna"){
+        if(proveraDatum(datum)){
+        return true;}
+    }
+    return false;
+}
+
+function proveraDatum(datum) {
+  var p = /^\d{4}-\d{2}-\d{2}$/;
+  if(!datum.match(p)) return false; 
+    return true; };
+
     
     </script>
     

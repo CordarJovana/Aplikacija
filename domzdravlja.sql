@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 03, 2020 at 01:09 AM
+-- Generation Time: Dec 16, 2020 at 12:38 AM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.3.24
 
@@ -31,8 +31,8 @@ CREATE TABLE `doktori` (
   `id` int(20) NOT NULL,
   `ime` varchar(255) NOT NULL,
   `prezime` varchar(255) NOT NULL,
-  `jmbg` varchar(255) DEFAULT NULL,
-  `idkategorije` int(20) DEFAULT NULL
+  `jmbg` varchar(255) NOT NULL,
+  `idkategorije` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -44,10 +44,7 @@ INSERT INTO `doktori` (`id`, `ime`, `prezime`, `jmbg`, `idkategorije`) VALUES
 (2, 'Dragana', 'Mikanović', '0905988382287', 2),
 (3, 'Filip', 'Dejanović', '0303990382287', 3),
 (4, 'Milica', 'Rakić', '1701969384787', 4),
-(11, 'Dragana', 'Mikanović', '0905988382287', 2),
-(12, 'Filip', 'Dejanović', '0303990382287', 3),
-(13, 'Milica', 'Rakić', '1701969384787', 4),
-(14, 'Branislav', 'Avramović', '0508992382287', 4);
+(14, 'Branislav    ', '    Avramović', '050899238222', 3);
 
 -- --------------------------------------------------------
 
@@ -56,7 +53,7 @@ INSERT INTO `doktori` (`id`, `ime`, `prezime`, `jmbg`, `idkategorije`) VALUES
 --
 
 CREATE TABLE `kategorijedoktora` (
-  `idkategorije` int(11) NOT NULL,
+  `idkategorije` int(20) NOT NULL,
   `naziv` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -92,7 +89,8 @@ INSERT INTO `pacijenti` (`id`, `ime`, `prezime`, `jmbg`) VALUES
 (2, 'Jovana', 'Čordar', '2704998715851'),
 (3, 'Nina', 'Mandić', '1605997715899'),
 (4, 'Ivan', 'Ivanović', '1203979643902'),
-(5, 'Petar', 'Petrović', '3008989678465');
+(5, 'Petar   ', '   Petrović', '3008989678464'),
+(18, 'Ivona  ', '  Petrović', '285182521718');
 
 -- --------------------------------------------------------
 
@@ -115,7 +113,10 @@ CREATE TABLE `pregledi` (
 INSERT INTO `pregledi` (`id`, `datum`, `idpacijenta`, `iddoktora`, `simptomi`) VALUES
 (1, '2016-03-20 11:24:09', 1, 1, 'Pacijent se žali na kašalj i bol u grlu'),
 (2, '2025-10-20 10:34:09', 2, 2, 'Pacijentu se pojavio osip na koži'),
-(3, '2007-06-20 09:34:09', 3, 3, 'Pacijent se žali na bolove u prstima');
+(3, '2007-06-20 09:34:09', 3, 3, 'Pacijent se žali na bolove u prstima'),
+(16, '2016-12-12 00:00:00', 2, 4, 'IYFOEFOAWIGWEHGWEL'),
+(17, '2020-12-12 00:00:00', 2, 2, 'uysfihsofiosedf'),
+(18, '2016-12-12 00:00:00', 1, 1, 'gfkgugukse');
 
 --
 -- Indexes for dumped tables
@@ -156,25 +157,25 @@ ALTER TABLE `pregledi`
 -- AUTO_INCREMENT for table `doktori`
 --
 ALTER TABLE `doktori`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `kategorijedoktora`
 --
 ALTER TABLE `kategorijedoktora`
-  MODIFY `idkategorije` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idkategorije` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `pacijenti`
 --
 ALTER TABLE `pacijenti`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `pregledi`
 --
 ALTER TABLE `pregledi`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables

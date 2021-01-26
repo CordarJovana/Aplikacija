@@ -55,6 +55,7 @@
                 <img src="Slike/Indeks.jpg" alt="First picture">
                 <div class="carousel-caption">
                     <h1 class="display-2">Bolnica H&H</h1>
+                    <h2 title="goodday">Dobar dan!</h2>
                     <h3>Tu za vaše zdravlje i vas!</h3>
             </div>
         </div>
@@ -87,3 +88,10 @@
 
 </body>
 </html>
+<script>
+    var datum=new Date();
+    if(datum.getHours>=12){
+        var poruka=$('h2[title="goodday"]');
+        poruka.text="Dovro veče!";
+    }
+</script>
